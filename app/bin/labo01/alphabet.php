@@ -45,3 +45,10 @@ var_dump(array_sum($zips));
 asort($cities);
 
 print_r($cities);
+
+//1.9 
+for ($i = 1000; $i < 10000; $i+=1000){
+    if (array_key_exists($i, $cities)) {
+        echo $cities[$i] . PHP_EOL;
+    }
+}
