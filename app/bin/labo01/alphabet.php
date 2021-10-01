@@ -40,3 +40,8 @@ $cities = [
 $zips = array_keys($cities);
 print_r($zips);
 var_dump(array_sum($zips));
+
+//1.8 sorting
+asort($cities);
+
+print_r($cities);
