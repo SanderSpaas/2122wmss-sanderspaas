@@ -3,7 +3,7 @@
  * Lab 02, Exercise 2 — Start from this version
  * Companies
  * @author Sander Spaas
- **/
+ */
 
 $companies = [['name' => 'Lunch Garden', 'address' => 'Avenue des Olympiades 2', 'zip' => 1140, 'city' => 'Bruxelles', 'activity' => 'Restaurants and mobile food service activities', 'vat' => 'BE0447668559'],
         ['name' => 'Randstad Belgium', 'address' => 'Avenue Charles-Quint 586/8', 'zip' => 1082, 'city' => 'Bruxelles', 'activity' => 'Specialised construction activities', 'vat' => 'BE0402725291'],
@@ -107,12 +107,14 @@ $companies = [['name' => 'Lunch Garden', 'address' => 'Avenue des Olympiades 2',
         ['name' => 'Fabricom', 'address' => 'Boulevard Simon Bolivar 34-36', 'zip' => 1000, 'city' => 'Bruxelles', 'activity' => 'Manufacture of metal structures and parts of structures', 'vat' => 'BE0425702910']];
 
         $ovlCompanies = array_filter($companies, function($company){
-            if(substr($company['zip'],0,1) === '9'){
-                return true;
+            if(substr($company['zip'], 0, 1) == 9){
+           return true;
+            }else{
+                return false;
             }
-            
-            return false;
-        })
+        });
+
+
 ?><!DOCTYPE html>
 <html>
 <head>
@@ -159,17 +161,19 @@ $companies = [['name' => 'Lunch Garden', 'address' => 'Avenue des Olympiades 2',
             <table class="alt">
                 <thead>
                 <tr>
-                    <th>Naam</th>
+                    <th>Naam </th>
                     <th>Straat en nummer</th>
                     <th>Postcode en gemeente</th>
                 </tr>
                 </thead>
                 <tbody>
+              <?php foreach ($ovlCompanies as $ovlCompany){?>
                 <tr>
-                    <td>in te vullen</td>
-                    <td>in te vullen</td>
-                    <td>in te vullen</td>
+                <td><?php print_r($ovlCompany['name']);?></td>
+                <td><?php print_r($ovlCompany['address']);?></td>
+                <td><?php print_r($ovlCompany['zip']) . print_r(' ') . print_r($ovlCompany['city']);?></td>
                 </tr>
+                <?php } ?>
                 </tbody>
             </table>
         </div>
