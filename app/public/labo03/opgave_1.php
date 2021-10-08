@@ -20,8 +20,9 @@ try {
 }
 // @TODO loop directory
 foreach ($directory as $file) {
-	if (!$file->isFile() || !in_array($file->getExtension(), $extention, true)) {
-		print_r('derp' . PHP_EOL);
+	if (!$file->isFile() || !in_array($file->getExtension(), $extention, true) && !$file->isDot() && !$file->isDir()) {
+	} else {
+		array_push($images, $baseUrl. DIRECTORY_SEPARATOR . $file->getFilename());
 	}
 }
 
@@ -90,7 +91,7 @@ foreach ($directory as $file) {
 	<ul>
 		<?php
 		foreach ($images as $image) {
-			echo '<li>...</li>' . PHP_EOL;
+			echo '<li><img src="'.$image.'"></li>' . PHP_EOL;
 		}
 		?>
 	</ul>
