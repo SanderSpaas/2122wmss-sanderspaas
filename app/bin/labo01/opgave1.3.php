@@ -1,35 +1,42 @@
 <?php
 
-$parameter = $argv[1]; // Input van console, zorg dat je " " gebruikt voor de zin.
-function isPangram($input){
-    $alphabet = array(); // nieuwe array aanmaken
+$parameter = $argv[1];
+function isPangram($input)
+{
+    $alphabet = array();
     for ($i = 97; $i <= 122; $i++) {
-        $alphabet[] = chr($i); //array vullen met alfabet
+        $alphabet[] = chr($i); //array gaan vullen
     }
 
-    $splitWoord = str_split($input); // Zet de string om naar een array
-    foreach ($splitWoord as $letter) { // Verdelen in letters
+    $splitword = str_split($input); // string => array
+    foreach ($splitword as $letter) { // gaan splitsen
 
-        if (ctype_alpha($letter)) { // Kijken of het een alfabetische letter is en geen leesttekens / nummers
+        if (ctype_alpha($letter)) { // checken of letter
 
-            if (ctype_upper($letter)) { // kijken of er hoofdletter is en dan veranderen naar kleine letter
+            if (ctype_upper($letter)) { // naar kleine letters gaan zetten
                 $letter = strtolower($letter);
             }
 
-            $key = array_search($letter, $alphabet); // zoekt voor de letter in de alphabet
-            if ($key !== false) { // de gevonden letter uit de alphabet halen
+            $key = array_search($letter, $alphabet); // gaan kijken in alfabet
+            if ($key !== false) { // letters er uit halen
                 unset($alphabet[$key]);
             }
         }
     }
     if (!$alphabet) {
-        echo ('De zin is een pangram' . PHP_EOL);
+        return true;
     } else {
-        echo 'De zin is geen pangram, deze letter onderbreken : ';
         foreach ($alphabet as $letter) {
             echo $letter . ' ';
+            echo PHP_EOL;
         }
-        echo PHP_EOL;
+        return false;
     }
 }
-isPangram($parameter);
+
+
+if (isPangram($parameter) === true) {
+    echo "dit woord is een pangram";
+} else {
+    echo "dit woord is geen pangram";
+};

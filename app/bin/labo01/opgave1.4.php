@@ -19,8 +19,6 @@ try{
     echo 'Time: ' . $time . PHP_EOL;
     echo 'Full: ' . $full . PHP_EOL;
 
-
-
 }catch(Exception $e){ // error catchen
     echo $dateString . ' is not a valid date.' . PHP_EOL;
 }
