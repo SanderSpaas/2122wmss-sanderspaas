@@ -13,16 +13,17 @@ $extention = ['jpg'];
 // Main code
 
 // @TODO Open directory and captions file using some SPL classes
-try {
-	$directory = new DirectoryIterator($basePath);
-} catch (Exception $e) {
-	echo 'Error opening path: ' + $e;
-}
+$directory = new DirectoryIterator($basePath);
+$captions = new SplFileObject($basePath . DIRECTORY_SEPARATOR . 'captions.txt');
 // @TODO loop directory
 foreach ($directory as $file) {
 	if (!$file->isFile() || !in_array($file->getExtension(), $extention, true) && !$file->isDot() && !$file->isDir()) {
 	} else {
-		array_push($images, $baseUrl. DIRECTORY_SEPARATOR . $file->getFilename());
+		$images[] = [
+			'url' => $baseUrl . DIRECTORY_SEPARATOR . $file->getFilename(),
+			'caption' => trim($captions->current())
+		];
+		$captions->next();
 	}
 }
 
@@ -91,7 +92,7 @@ foreach ($directory as $file) {
 	<ul>
 		<?php
 		foreach ($images as $image) {
-			echo '<li><img src="'.$image.'"></li>' . PHP_EOL;
+			echo '<li><img src="'.$image['url'].'">'.$image['caption'].'</li>' . PHP_EOL;
 		}
 		?>
 	</ul>
