@@ -26,11 +26,12 @@ if (!is_dir($baseDirectory)) {
 $directoryIterator = new DirectoryIterator($baseDirectory);
 foreach ($directoryIterator as $item) {
 	$size = $item->isFile() ? $item->getSize() : null; //voor het geval dat het item een file is //moet niet met ternaire operator
-	$expectedIcon = $baseDirectory . $item->getExtension() . '.gif';
+	$expectedIcon = $baseDirectoryForIcons . $item->getExtension() . '.gif';
 
 	$icon = 'default.gif';
+
 	if (file_exists($expectedIcon)) {
-		$icon = $item->getExtension() . 'gif';
+		$icon = $item->getExtension() . '.gif';
 	}
 	if ($item->isDir()) {
 		$icon = 'folder.gif';
