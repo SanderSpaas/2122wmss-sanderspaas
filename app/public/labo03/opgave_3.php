@@ -10,46 +10,45 @@ $baseDirectoryForIcons = __DIR__  . DIRECTORY_SEPARATOR . 'icons' . DIRECTORY_SE
 $items = [];
 
 if (isset($_GET['path'])) {
-    $baseDirectory .= DIRECTORY_SEPARATOR . $_GET['path'];
+	$baseDirectory .= DIRECTORY_SEPARATOR . $_GET['path'];
 }
 
 if (stristr($baseDirectory, '..')) {
-    die('not welcome here');
+	die('not welcome here');
 }
 
 if (!is_dir($baseDirectory)) {
-    die('folder does not exist');
+	die('folder does not exist');
 }
 
 //url = opgave_3.php?path=images
 //baseDirectory = __DIR__ . 'images';
 $directoryIterator = new DirectoryIterator($baseDirectory);
-foreach($directoryIterator as $item) {
-    $size = $item->isFile()? $item->getSize() : null; //voor het geval dat het item een file is //moet niet met ternaire operator
-    $expectedIcon = $baseDirectory . $item->getExtension() . '.gif';
+foreach ($directoryIterator as $item) {
+	$size = $item->isFile() ? $item->getSize() : null; //voor het geval dat het item een file is //moet niet met ternaire operator
+	$expectedIcon = $baseDirectory . $item->getExtension() . '.gif';
 
-    $icon = 'default.gif';
-    if(file_exists($expectedIcon)) {
-        $icon = $item->getExtension() . 'gif';
-    }
-    if($item ->  isDir()) {
-        $icon = 'folder.gif';
-    }
-    $items[] = [
-        'path' => $item->getPath(),
-        'size' => $size,
-        'name' => $item->getFilename(),
-        'extension' => $item->getExtension(),
-        'icon' =>  $icon,
-    ];
+	$icon = 'default.gif';
+	if (file_exists($expectedIcon)) {
+		$icon = $item->getExtension() . 'gif';
+	}
+	if ($item->isDir()) {
+		$icon = 'folder.gif';
+	}
+	$items[] = [
+		'path' => $item->getPathname(),
+		'size' => $size,
+		'name' => $item->getFilename(),
+		'extension' => $item->getExtension(),
+		'icon' =>  $icon,
+	];
 }
-print_r($items);
-die();
 
 ?>
 
 <!doctype html>
 <html>
+
 <head>
 	<title>test</title>
 	<meta charset="utf-8" />
@@ -58,6 +57,7 @@ die();
 			margin: 0;
 			padding: 0;
 		}
+
 		li {
 			list-style: none;
 			display: block;
@@ -67,7 +67,7 @@ die();
 		}
 
 		li:nth-child(2n) {
-			background: rgba(0,0,0,0.05);
+			background: rgba(0, 0, 0, 0.05);
 		}
 
 		li:hover {
@@ -81,9 +81,15 @@ die();
 		}
 	</style>
 </head>
+
 <body>
 
 	<h1>Browsing <code>files/images</code></h1>
+	<?php
+	foreach ($items as $item) {
+		echo "<li><a href=" . substr($item['path'], 15) . "><img src=" . "icons/" . $item['icon'] . " />" . $item['name'] . " <em>" . $item['size'] . "</em></a></li>" . PHP_EOL;
+	}
+	?>
 
 	<ul>
 		<li><a href="opgave_3.php?path=files"><img src="icons/up.gif" />..</a></li>
@@ -95,4 +101,5 @@ die();
 	</ul>
 
 </body>
+
 </html>
