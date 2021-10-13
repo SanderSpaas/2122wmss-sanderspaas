@@ -25,7 +25,7 @@ if (!is_dir($baseDirectory)) {
 //baseDirectory = __DIR__ . 'images';
 $directoryIterator = new DirectoryIterator($baseDirectory);
 foreach ($directoryIterator as $item) {
-	$size = $item->isFile() ? $item->getSize() : null; //voor het geval dat het item een file is //moet niet met ternaire operator
+	$size = $item->isFile() ? $item->getSize() : null; //in case the item is a file
 	$expectedIcon = $baseDirectoryForIcons . $item->getExtension() . '.gif';
 
 	$icon = 'default.gif';
@@ -51,8 +51,9 @@ foreach ($directoryIterator as $item) {
 <html>
 
 <head>
-	<title>test</title>
+	<title>File Browser</title>
 	<meta charset="utf-8" />
+	<link rel="site icon" href="icons/folder.png" type="image/x-icon">
 	<style>
 		ul {
 			margin: 0;
@@ -85,7 +86,7 @@ foreach ($directoryIterator as $item) {
 
 <body>
 
-	<h1>Browsing <code>files/images</code></h1>
+	<h1>Browsing <code><img src="icons/folder.gif"/> files/images <img src="icons/folder.gif"/></code></h1>
 	<?php
 	echo "<li><a href=" . basename($_SERVER['PHP_SELF'])  . "><img src=" . "icons/folder.gif" . " />Create a folder</a></li>" . PHP_EOL;
 	foreach ($items as $item) {
@@ -97,7 +98,7 @@ foreach ($directoryIterator as $item) {
 				echo "<li><a href=" . basename($_SERVER['PHP_SELF'])  . "?path=" . $item['name'] . "><img src=" . "icons/" . $item['icon'] . " />" . $item['name'] . " <em>" . $item['size'] . "</em></a></li>" . PHP_EOL;
 			}
 		} else {
-			echo "<li><a href=" . basename($_SERVER['PHP_SELF'])  . "?path=" . $item['name'] . " />" . $item['name'] . " <em>" . $item['size'] . "</em></a></li>" . PHP_EOL;
+			echo "<li><a href=" . $_GET['path']	. DIRECTORY_SEPARATOR . $item['name'] . " download><img src=" . "icons/" . $item['icon'] . " />" . $item['name'] . " <em>" . $item['size'] . "</em></a></li>" . PHP_EOL;
 			// echo basename($_SERVER['PHP_SELF'])  . "?path=" . $item['name']; 
 		}
 	}
