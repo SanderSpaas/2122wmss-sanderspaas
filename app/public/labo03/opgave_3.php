@@ -87,17 +87,18 @@ foreach ($directoryIterator as $item) {
 
 	<h1>Browsing <code>files/images</code></h1>
 	<?php
+	echo "<li><a href=" . basename($_SERVER['PHP_SELF'])  . "><img src=" . "icons/folder.gif" . " />Create a folder</a></li>" . PHP_EOL;
 	foreach ($items as $item) {
 		if (is_dir($item['path'])) {
-			if ($item['name'] == "..") {
-			} else if ($item['name'] == ".") {
+			if ($item['name'] === "..") {
+			} else if ($item['name'] === ".") {
 				echo "<li><a href=" . basename($_SERVER['PHP_SELF'])  . "?path=" . $item['name'] . "><img src=" . "icons/up.gif" . " />" . $item['name'] . " <em>" . $item['size'] . "</em></a></li>" . PHP_EOL;
 			} else {
 				echo "<li><a href=" . basename($_SERVER['PHP_SELF'])  . "?path=" . $item['name'] . "><img src=" . "icons/" . $item['icon'] . " />" . $item['name'] . " <em>" . $item['size'] . "</em></a></li>" . PHP_EOL;
 			}
 		} else {
-			echo "<li><a href=" . $item['path'] . " download> <img src=" . "icons/" . $item['icon'] . " />" . $item['name'] . " <em>" . $item['size'] . "</em></a></li>" . PHP_EOL;
-		echo $item['path'];
+			echo "<li><a href=" . basename($_SERVER['PHP_SELF'])  . "?path=" . $item['name'] . " />" . $item['name'] . " <em>" . $item['size'] . "</em></a></li>" . PHP_EOL;
+			// echo basename($_SERVER['PHP_SELF'])  . "?path=" . $item['name']; 
 		}
 	}
 	?>
