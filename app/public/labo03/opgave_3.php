@@ -88,10 +88,20 @@ foreach ($directoryIterator as $item) {
 	<h1>Browsing <code>files/images</code></h1>
 	<?php
 	foreach ($items as $item) {
-		echo "<li><a href=" . substr($item['path'], 15) . "><img src=" . "icons/" . $item['icon'] . " />" . $item['name'] . " <em>" . $item['size'] . "</em></a></li>" . PHP_EOL;
+		if (is_dir($item['path'])) {
+			if ($item['name'] == "..") {
+			} else if ($item['name'] == ".") {
+				echo "<li><a href=" . basename($_SERVER['PHP_SELF'])  . "?path=" . $item['name'] . "><img src=" . "icons/up.gif" . " />" . $item['name'] . " <em>" . $item['size'] . "</em></a></li>" . PHP_EOL;
+			} else {
+				echo "<li><a href=" . basename($_SERVER['PHP_SELF'])  . "?path=" . $item['name'] . "><img src=" . "icons/" . $item['icon'] . " />" . $item['name'] . " <em>" . $item['size'] . "</em></a></li>" . PHP_EOL;
+			}
+		} else {
+			echo "<li><a href=" . $item['path'] . " download> <img src=" . "icons/" . $item['icon'] . " />" . $item['name'] . " <em>" . $item['size'] . "</em></a></li>" . PHP_EOL;
+		echo $item['path'];
+		}
 	}
 	?>
-
+	<!---
 	<ul>
 		<li><a href="opgave_3.php?path=files"><img src="icons/up.gif" />..</a></li>
 		<li><a href="opgave_3.php?path=files%2Fimages%2Ficons"><img src="icons/folder.gif" />icons</a></li>
@@ -100,7 +110,7 @@ foreach ($directoryIterator as $item) {
 		<li><a href="files/images/test2.jpg"><img src="icons/jpg.gif" />test2.jpg</a> <em>(4kB)</em></li>
 		<li><a href="files/images/test.zip"><img src="icons/zip.gif" />test.zip</a> <em>(20kB)</em></li>
 	</ul>
-
+-->
 </body>
 
 </html>
