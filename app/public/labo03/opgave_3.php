@@ -86,9 +86,11 @@ foreach ($directoryIterator as $item) {
 
 <body>
 
-	<h1>Browsing <code><img src="icons/folder.gif"/> files/images <img src="icons/folder.gif"/></code></h1>
+	<h1>Browsing <code><img src="icons/folder.gif" /> files/images <img src="icons/folder.gif" /></code></h1>
 	<?php
 	echo "<li><a href=" . basename($_SERVER['PHP_SELF'])  . "><img src=" . "icons/folder.gif" . " />Create a folder</a></li>" . PHP_EOL;
+	echo "<li><a href=" . basename($_SERVER['PHP_SELF'])  . "><img src=" . "icons/remfolder.gif" . " />Remove a folder</a></li>" . PHP_EOL;
+	echo "<li><a href=" . basename($_SERVER['PHP_SELF'])  . "><img src=" . "icons/editfolder.gif" . " />Edit a folder</a></li>" . PHP_EOL;
 	foreach ($items as $item) {
 		if (is_dir($item['path'])) {
 			if ($item['name'] === "..") {
@@ -98,8 +100,11 @@ foreach ($directoryIterator as $item) {
 				echo "<li><a href=" . basename($_SERVER['PHP_SELF'])  . "?path=" . $item['name'] . "><img src=" . "icons/" . $item['icon'] . " />" . $item['name'] . " <em>" . $item['size'] . "</em></a></li>" . PHP_EOL;
 			}
 		} else {
-			echo "<li><a href=" . $_GET['path']	. DIRECTORY_SEPARATOR . $item['name'] . " download><img src=" . "icons/" . $item['icon'] . " />" . $item['name'] . " <em>" . $item['size'] . "</em></a></li>" . PHP_EOL;
-			// echo basename($_SERVER['PHP_SELF'])  . "?path=" . $item['name']; 
+			if (isset($_GET['path'])) {
+				$path = $_GET['path'];
+				echo "<li><a href=" . $path	. DIRECTORY_SEPARATOR . $item['name'] . " download><img src=" . "icons/" . $item['icon'] . " />" . $item['name'] . " <em>" . $item['size'] . "</em></a></li>" . PHP_EOL;
+				// echo basename($_SERVER['PHP_SELF'])  . "?path=" . $item['name']; 
+			}
 		}
 	}
 	?>
