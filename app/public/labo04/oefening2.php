@@ -67,15 +67,15 @@
 
 		// dump $_GET
 		// dump($_GET);
-		
-		if (filter_var($number1, FILTER_VALIDATE_INT) && filter_var($number2, FILTER_VALIDATE_INT)) {
-			echo $number1 + $number2;
-		} else {
-			//unset($number1, $number2);	
-			echo("Variable is not an integer");	
+		if(!empty($number1) && !empty($number2)){
+			if (filter_var($number1, FILTER_VALIDATE_INT) && filter_var($number2, FILTER_VALIDATE_INT)) {
+				echo $number1 + $number2;
+			} else {
+				unset($number1, $number2);	
+				echo("Variable is not an integer");	
+			}
 		}
-
-
+	
 ?>
 
 	</div>
