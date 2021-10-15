@@ -7,7 +7,8 @@
 	$number1 = isset($_GET['number1']) ? (string) $_GET['number1'] : '';
 	$number2 = isset($_GET['number2']) ? (string) $_GET['number2'] : '';
 
-?><!DOCTYPE html>
+?>
+<!DOCTYPE html>
 <html>
 <head>
 	<title>Testform</title>
@@ -75,7 +76,6 @@
 				echo("Variable is not an integer");	
 			}
 		}
-	
 ?>
 
 	</div>
