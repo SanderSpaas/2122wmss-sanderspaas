@@ -101,6 +101,9 @@
 
 		// dump $_GET
 		dump($_GET);
+        if(empty($name)){
+            echo '<script>alert("Gelieve jouw naam in te vullen")</script>';
+        }
 
 ?>
 
