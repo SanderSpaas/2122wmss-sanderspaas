@@ -46,7 +46,6 @@ if (isset($_FILES['image']) && ($_FILES['image']['error'] === UPLOAD_ERR_OK)) {
         if ($moved) {
             rename($baseUrl . DIRECTORY_SEPARATOR . $_FILES['image']['name'], $basePath. DIRECTORY_SEPARATOR. $counter.".jpg");
             $counter++;
-            echo '<p><img src="' . $_FILES['image']['name'] . '" alt="" /></p>';
             file_put_contents('../labo04/images/captions.txt', PHP_EOL.$note, FILE_APPEND);
             $note = '';
         } else {
