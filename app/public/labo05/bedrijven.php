@@ -13,20 +13,14 @@ require_once('../../src/Services/DatabaseConnector.php');
 
 
 $connection = \Services\DatabaseConnector::getConnection();
-// connect() is for testing, and NOT required before querying
-// connect() returns    TRUE if the connection was successfully established
-//                      FALSE if the connection is already open
-$result = $connection->connect();
-if ($result) {
-    echo 'Connection was successfully established';
-}
 
 // build SQL query depending on parameters (sort, search)
-$result = $connection->query('SELECT * FROM companies');
-var_dump($result);
+$query = 'SELECT * FROM companies';
+$query = $connection->query($query);
+
 
 // execute query and fetch result
-
+$companies = $query->fetchAllAssociative();
 ?>
 <!DOCTYPE html>
 <html>
@@ -85,11 +79,13 @@ var_dump($result);
                         </tr>
                     </thead>
                     <tbody>
+                    <?php foreach($companies as $company) { ?>
                         <tr>
-                            <td>in te vullen</td>
-                            <td>in te vullen</td>
-                            <td>in te vullen</td>
+                            <td><?php echo $company['name']?></td>
+                            <td><?php echo $company['address']?></td>
+                            <td><?php echo $company['city'] . ' ' . $company['zip']?></td>
                         </tr>
+                        <?php } ?>
                     </tbody>
                 </table>
             </div>
