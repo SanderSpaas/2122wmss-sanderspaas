@@ -10,17 +10,48 @@ require_once('../../vendor/autoload.php');
 require_once('../../config/database.php');
 require_once('../../src/Services/DatabaseConnector.php');
 
-
-
+// connect to database
 $connection = \Services\DatabaseConnector::getConnection();
+$query = 'SELECT * FROM COMPANIES';
+$query = $connection->query($query);
+$companies = $query->fetchAllAssociative();
+
+// fetch GET/POST parameters
+$moduleAction = isset($_GET['moduleAction']) ? (string) $_GET['moduleAction'] : '';
+$search = isset($_GET['search']) ? (string) $_GET['search'] : '';
+$sort = isset($_GET['sort']) ? (string) $_GET['sort'] : '';
+$type = isset($_GET['type']) ? (string) $_GET['type'] : '';
+$statement = '';
 
 // build SQL query depending on parameters (sort, search)
-$query = 'SELECT * FROM companies';
-$query = $connection->query($query);
+if ($moduleAction == 'processName'){
+    if (trim($search) != ''){
+        $statement = $connection->prepare('SELECT * FROM COMPANIES WHERE NAME = ?');
+        $statement->bindValue(1, $search, 'string');
+        $result = $statement->executeQuery();
+        $companies = $result->fetchAllAssociative();
+    }
+}
 
+if (trim($sort) === 'name'){
+    if(trim($type) === 'ASC'){
+        $statement = $connection->prepare('SELECT * FROM COMPANIES ORDER BY NAME ASC');
+    }else{
+        $statement = $connection->prepare('SELECT * FROM COMPANIES ORDER BY NAME DESC');
+    }
+    $result = $statement->executeQuery();
+    $companies = $result->fetchAllAssociative();
+}
 
-// execute query and fetch result
-$companies = $query->fetchAllAssociative();
+if (trim($sort) === 'zip'){
+    if(trim($type) === 'ASC'){
+        $statement = $connection->prepare('SELECT * FROM COMPANIES ORDER BY ZIP ASC');
+    }else{
+        $statement = $connection->prepare('SELECT * FROM COMPANIES ORDER BY ZIP DESC');
+    }
+    $result = $statement->executeQuery();
+    $companies = $result->fetchAllAssociative();
+}
 ?>
 <!DOCTYPE html>
 <html>
