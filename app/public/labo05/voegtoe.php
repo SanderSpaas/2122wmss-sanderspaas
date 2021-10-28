@@ -5,11 +5,56 @@
  * @author <your name>
  */
 
-require_once ('../../vendor/autoload.php');
-require_once ('../../config/database.php');
-require_once ('../../src/Services/DatabaseConnector.php');
+require_once('../../vendor/autoload.php');
+require_once('../../config/database.php');
+require_once('../../src/Services/DatabaseConnector.php');
 
+$connection = \Services\DatabaseConnector::getConnection();
 // fetch GET/POST parameters
+// initial values
+$name = isset($_POST['name']) ? (string)$_POST['name'] : '';
+$address = isset($_POST['address']) ? (string)$_POST['address'] : '';
+$zip = isset($_POST['zip']) ? (string)$_POST['zip'] : '';
+$city = isset($_POST['city']) ? (string)$_POST['city'] : '';
+$activity = isset($_POST['activity']) ? (string)$_POST['activity'] : '';
+$vat = isset($_POST['vat']) ? (string)$_POST['vat'] : '';
+$date_added = (new DateTime()) -> format('y-m-d h:i:s');
+$moduleAction = isset($_POST['moduleAction']) ? (string)$_POST['moduleAction'] : '';
+$msgName = '<li>Geef een bedrijfsnaam op</li>';
+$msgAddress = '<li>Geef een straat en nummer op</li>';
+$msgCity = '<li>Geef een gemeente op</li>';
+$msgZip = '<li>Geef een postcode op</li>';
+$msgVat = '<li>Geef een BTW-nummer op</li>';
+$allOk = true;
+
+if ($moduleAction == 'processName') {
+
+    if (trim($name) == '') {
+        $allOk = false;
+    }
+    if (trim($address) == '') {
+        $allOk = false;
+    }
+    if (trim($zip) == '') {
+        $allOk = false;
+    }
+    if (trim($city) == '') {
+        $allOk = false;
+    }
+    if (trim($vat) == '') {
+        $allOk = false;
+    }
+
+    // end of form check. If $allOk still is true, then the form was sent in correctly
+    if ($allOk) {
+        header('Location: bedrijven.php');
+        $stmt = $connection->prepare('INSERT INTO companies (name, address, zip, city, activity, vat, date_added) VALUES (?, ?, ?, ? ,? ,?, ?)');
+        $result = $stmt->executeStatement([$name, $address, $zip, $city, $activity, $vat, $date_added]);
+    }
+
+}
+
+
 
 // connect to database
 
@@ -50,27 +95,40 @@ require_once ('../../src/Services/DatabaseConnector.php');
         <header class="major">
             <h2>Een bedrijf toevoegen</h2>
         </header>
-        <ul class="errors">
-            <li>Geef een bedrijfsnaam op</li>
-            <li>Geef een straat en nummer op</li>
-            <li>Geef een postcode op</li>
-            <li>Geef een gemeente op</li>
-            <li>Geef een BTW nummer op</li>
-        </ul>
+        <?php if (!$allOk) {
+            echo '<ul class="errors">' . PHP_EOL;
+            if (trim($name) === '') {
+                echo $msgName;
+            }
+            if (trim($address) === '') {
+                echo $msgAddress;
+            }
+            if (trim($zip) === '') {
+                echo $msgZip;
+            }
+            if (trim($city) === '') {
+                echo $msgCity;
+            }
+            if (trim($vat) === '') {
+                echo $msgVat;
+            }
+            echo '</ul>' . PHP_EOL;
+        } ?>
         <div class="row">
             <div class="col-12">
                 <form method="post" action="voegtoe.php">
                     <input type="hidden" name="action" value="addCompany">
                     <div class="row gtr-uniform gtr-50">
-                        <div class="col-12"><input type="text" name="name" id="name" placeholder="bedrijfsnaam" /></div>
-                        <div class="col-12"><input type="text" name="address" id="address" placeholder="straat en nummer" /></div>
-                        <div class="col-6"><input type="text" name="zip" id="zip" placeholder="postcode" /></div>
-                        <div class="col-6"><input type="text" name="city" id="city" placeholder="gemeente" /></div>
-                        <div class="col-12"><textarea name="activity" id="activity" placeholder="activiteiten" rows="2"></textarea></div>
-                        <div class="col-12"><input type="text" name="vat" id="vat" placeholder="btw-nummer" /></div>
+                        <div class="col-12"><input type="text" name="name" id="name" placeholder="bedrijfsnaam" value="<?php echo htmlentities($name); ?>"/></div>
+                        <div class="col-12"><input type="text" name="address" id="address" placeholder="straat en nummer" value="<?php echo htmlentities($address); ?>"/></div>
+                        <div class="col-6"><input type="text" name="zip" id="zip" placeholder="postcode" value="<?php echo htmlentities($zip); ?>"/></div>
+                        <div class="col-6"><input type="text" name="city" id="city" placeholder="gemeente" value="<?php echo htmlentities($city); ?>"/></div>
+                        <div class="col-12"><textarea name="activity" id="activity" placeholder="activiteiten" rows="2"><?php echo htmlentities($activity); ?></textarea></div>
+                        <div class="col-12"><input type="text" name="vat" id="vat" placeholder="btw-nummer" value="<?php echo htmlentities($vat); ?>"/></div>
                     </div>
 
                     <ul class="actions">
+                        <li><input type="hidden" name="moduleAction" value="processName" /></li>
                         <li><input type="submit" value="Versturen" /></li>
                     </ul>
                 </form>
