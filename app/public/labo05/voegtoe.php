@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Lab 05 — Start from this version
  * Companies
@@ -18,7 +19,7 @@ $zip = isset($_POST['zip']) ? (string)$_POST['zip'] : '';
 $city = isset($_POST['city']) ? (string)$_POST['city'] : '';
 $activity = isset($_POST['activity']) ? (string)$_POST['activity'] : '';
 $vat = isset($_POST['vat']) ? (string)$_POST['vat'] : '';
-$date_added = (new DateTime()) -> format('y-m-d h:i:s');
+$date_added = (new DateTime())->format('y-m-d h:i:s');
 $moduleAction = isset($_POST['moduleAction']) ? (string)$_POST['moduleAction'] : '';
 $msgName = '<li>Geef een bedrijfsnaam op</li>';
 $msgAddress = '<li>Geef een straat en nummer op</li>';
@@ -51,7 +52,6 @@ if ($moduleAction == 'processName') {
         $stmt = $connection->prepare('INSERT INTO companies (name, address, zip, city, activity, vat, date_added) VALUES (?, ?, ?, ? ,? ,?, ?)');
         $result = $stmt->executeStatement([$name, $address, $zip, $city, $activity, $vat, $date_added]);
     }
-
 }
 
 
@@ -62,8 +62,10 @@ if ($moduleAction == 'processName') {
 
 // persist fields in the HTML below
 
-?><!DOCTYPE html>
+?>
+<!DOCTYPE html>
 <html>
+
 <head>
     <title>Voka - bedrijf toevoegen</title>
     <meta charset="utf-8" />
@@ -80,76 +82,78 @@ if ($moduleAction == 'processName') {
     <!--[if lte IE 8]><script src="js/ie/respond.min.js"></script><![endif]-->
     <script src="js/main.js"></script>
 </head>
+
 <body id="top">
 
-<!-- Header -->
-<header id="header">
-    <h1><a href="#"><strong>voka</strong></a></h1>
-    <h1>Vlaams netwerk van ondernemingen</h1>
-</header>
+    <!-- Header -->
+    <header id="header">
+        <h1><a href="#"><strong>voka</strong></a></h1>
+        <h1>Vlaams netwerk van ondernemingen</h1>
+    </header>
 
-<!-- Main -->
-<div id="main">
-    <!-- Welcome -->
-    <section id="welcome">
-        <header class="major">
-            <h2>Een bedrijf toevoegen</h2>
-        </header>
-        <?php if (!$allOk) {
-            echo '<ul class="errors">' . PHP_EOL;
-            if (trim($name) === '') {
-                echo $msgName;
-            }
-            if (trim($address) === '') {
-                echo $msgAddress;
-            }
-            if (trim($zip) === '') {
-                echo $msgZip;
-            }
-            if (trim($city) === '') {
-                echo $msgCity;
-            }
-            if (trim($vat) === '') {
-                echo $msgVat;
-            }
-            echo '</ul>' . PHP_EOL;
-        } ?>
-        <div class="row">
-            <div class="col-12">
-                <form method="post" action="voegtoe.php">
-                    <input type="hidden" name="action" value="addCompany">
-                    <div class="row gtr-uniform gtr-50">
-                        <div class="col-12"><input type="text" name="name" id="name" placeholder="bedrijfsnaam" value="<?php echo htmlentities($name); ?>"/></div>
-                        <div class="col-12"><input type="text" name="address" id="address" placeholder="straat en nummer" value="<?php echo htmlentities($address); ?>"/></div>
-                        <div class="col-6"><input type="text" name="zip" id="zip" placeholder="postcode" value="<?php echo htmlentities($zip); ?>"/></div>
-                        <div class="col-6"><input type="text" name="city" id="city" placeholder="gemeente" value="<?php echo htmlentities($city); ?>"/></div>
-                        <div class="col-12"><textarea name="activity" id="activity" placeholder="activiteiten" rows="2"><?php echo htmlentities($activity); ?></textarea></div>
-                        <div class="col-12"><input type="text" name="vat" id="vat" placeholder="btw-nummer" value="<?php echo htmlentities($vat); ?>"/></div>
-                    </div>
+    <!-- Main -->
+    <div id="main">
+        <!-- Welcome -->
+        <section id="welcome">
+            <header class="major">
+                <h2>Een bedrijf toevoegen</h2>
+            </header>
+            <?php if (!$allOk) {
+                echo '<ul class="errors">' . PHP_EOL;
+                if (trim($name) === '') {
+                    echo $msgName;
+                }
+                if (trim($address) === '') {
+                    echo $msgAddress;
+                }
+                if (trim($zip) === '') {
+                    echo $msgZip;
+                }
+                if (trim($city) === '') {
+                    echo $msgCity;
+                }
+                if (trim($vat) === '') {
+                    echo $msgVat;
+                }
+                echo '</ul>' . PHP_EOL;
+            } ?>
+            <div class="row">
+                <div class="col-12">
+                    <form method="post" action="voegtoe.php">
+                        <input type="hidden" name="action" value="addCompany">
+                        <div class="row gtr-uniform gtr-50">
+                            <div class="col-12"><input type="text" name="name" id="name" placeholder="bedrijfsnaam" value="<?php echo htmlentities($name); ?>" /></div>
+                            <div class="col-12"><input type="text" name="address" id="address" placeholder="straat en nummer" value="<?php echo htmlentities($address); ?>" /></div>
+                            <div class="col-6"><input type="text" name="zip" id="zip" placeholder="postcode" value="<?php echo htmlentities($zip); ?>" /></div>
+                            <div class="col-6"><input type="text" name="city" id="city" placeholder="gemeente" value="<?php echo htmlentities($city); ?>" /></div>
+                            <div class="col-12"><textarea name="activity" id="activity" placeholder="activiteiten" rows="2"><?php echo htmlentities($activity); ?></textarea></div>
+                            <div class="col-12"><input type="text" name="vat" id="vat" placeholder="btw-nummer" value="<?php echo htmlentities($vat); ?>" /></div>
+                        </div>
 
-                    <ul class="actions">
-                        <li><input type="hidden" name="moduleAction" value="processName" /></li>
-                        <li><input type="submit" value="Versturen" /></li>
-                    </ul>
-                </form>
+                        <ul class="actions">
+                            <li><input type="hidden" name="moduleAction" value="processName" /></li>
+                            <li><input type="submit" value="Versturen" /></li>
+                        </ul>
+                    </form>
+                </div>
             </div>
-        </div>
-    </section>
-</div>
+        </section>
+    </div>
 
-<!-- Footer -->
-<footer id="footer">
-    <ul class="icons">
-        <li><a href="http://www.events.be/" class="icon fa-globe"><span class="label">Website</span></a></li>
-        <li><a href="mailto:info@events.be" class="icon fa-envelope-o"><span class="label">Email</span></a></li>
-    </ul>
-    <ul class="copyright">
-        <li>&copy; <a href="http://www.ikdoeict.be/" title="IkDoeICT.be">IkDoeICT.be</a></li>
-        <li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
-    </ul>
-</footer>
+    <!-- Footer -->
+    <footer id="footer">
+        <ul class="icons">
+            <li><a href="http://www.events.be/" class="icon fa-globe"><span class="label">Website</span></a></li>
+            <li><a href="mailto:info@events.be" class="icon fa-envelope-o"><span class="label">Email</span></a></li>
+        </ul>
+        <ul class="copyright">
+            <li>&copy; <a href="http://www.ikdoeict.be/" title="IkDoeICT.be">IkDoeICT.be</a></li>
+            <li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+        </ul>
+    </footer>
 
 
 
 </body>
+
 </html>
