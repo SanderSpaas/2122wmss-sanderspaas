@@ -53,6 +53,9 @@ require_once ('../../src/Services/DatabaseConnector.php');
         <ul class="errors">
             <li>Geef een bedrijfsnaam op</li>
             <li>Geef een straat en nummer op</li>
+            <li>Geef een postcode op</li>
+            <li>Geef een gemeente op</li>
+            <li>Geef een BTW nummer op</li>
         </ul>
         <div class="row">
             <div class="col-12">

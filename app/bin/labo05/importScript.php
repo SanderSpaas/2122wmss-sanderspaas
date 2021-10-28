@@ -9,6 +9,7 @@ $statement = $connection->prepare('INSERT INTO companies (name, address, zip, ci
 
     if (($handle = fopen($fileName, 'r')) != FALSE){
         while (($company = fgetcsv($handle, 1000, ',')) != FALSE){
+            if($row == 1){ $row++; continue; }
             $statement->bindValue(':name', $company[0]);
             $statement->bindValue(':address', $company[1]);
             $statement->bindValue(':zip', $company[2]);

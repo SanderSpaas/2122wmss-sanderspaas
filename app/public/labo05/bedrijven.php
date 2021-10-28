@@ -26,8 +26,8 @@ $statement = '';
 // build SQL query depending on parameters (sort, search)
 if ($moduleAction == 'processName'){
     if (trim($search) != ''){
-        $statement = $connection->prepare('SELECT * FROM COMPANIES WHERE NAME = ?');
-        $statement->bindValue(1, $search, 'string');
+        $statement = $connection->prepare('SELECT * FROM COMPANIES WHERE name LIKE ?');
+        $statement->bindValue(1, '%'.$search.'%', 'string');
         $result = $statement->executeQuery();
         $companies = $result->fetchAllAssociative();
     }
@@ -96,6 +96,7 @@ if (trim($sort) === 'zip'){
                         <input type="text" name="search" id="search" value="" placeholder="Zoekterm" />
                     </div>
                     <div class="3u 12u$(xsmall)">
+                        <input type="hidden" name="moduleAction" value="processName">
                         <input type="submit" value="Zoeken" class="special fit small" style="height: 3.4em" />
                     </div>
                 </div>
@@ -104,19 +105,26 @@ if (trim($sort) === 'zip'){
                 <table class="alt">
                     <thead>
                         <tr>
-                            <th>Naam &nbsp; <a href="#" style="border-bottom: 0;">&#9660;</a>&nbsp;<a href="#" style="border-bottom: 0;">&#9650;</a></th>
+                            <th>Naam &nbsp; <a href="?sort=name&type=DESC" style="border-bottom: 0;">&#9660;</a>&nbsp;<a
+                                    href="?sort=name&type=ASC" style="border-bottom: 0;">&#9650;</a></th>
                             <th>Straat en nummer</th>
-                            <th>Postcode en gemeente &nbsp; <a href="#" style="border-bottom: 0;">&#9660;</a>&nbsp;<a href="#" style="border-bottom: 0;">&#9650;</a></th>
+                            <th>Postcode en gemeente &nbsp; <a href="?sort=zip&type=DESC"
+                                    style="border-bottom: 0;">&#9660;</a>&nbsp;<a href="?sort=zip&type=ASC"
+                                    style="border-bottom: 0;">&#9650;</a></th>
                         </tr>
                     </thead>
                     <tbody>
-                    <?php foreach($companies as $company) { ?>
+                        <tr>
+
+                            <?php foreach($companies as $company) { ?>
                         <tr>
                             <td><?php echo $company['name']?></td>
                             <td><?php echo $company['address']?></td>
                             <td><?php echo $company['city'] . ' ' . $company['zip']?></td>
                         </tr>
                         <?php } ?>
+
+                        </tr>
                     </tbody>
                 </table>
             </div>
