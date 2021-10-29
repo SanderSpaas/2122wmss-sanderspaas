@@ -93,10 +93,24 @@ class __TwigTemplate_73415d0b48fd136b53658e1563cb93f20f3c45337569f756f6e8b4ee34d
                             <label for=\"priority\" class=\"col-sm-3 control-label\">Prioriteit</label>
                             <div class=\"col-sm-9\">
                                 <select name=\"priority\" id=\"priority\" class=\"form-control\">
-                                    <option value=\"low\" selected=\"selected\">low</option>
-                                    <option value=\"normal\">normal</option>
-                                    <option value=\"high\">high</option>
-                                </select>
+                                ";
+        // line 57
+        $context['_parent'] = $context;
+        $context['_seq'] = twig_ensure_traversable(($context["priorities"] ?? null));
+        foreach ($context['_seq'] as $context["_key"] => $context["priority"]) {
+            // line 58
+            echo "                                    <option value=\"";
+            echo twig_escape_filter($this->env, $context["priority"], "html", null, true);
+            echo "\" selected=\"selected\">";
+            echo twig_escape_filter($this->env, $context["priority"], "html", null, true);
+            echo "</option>
+                                ";
+        }
+        $_parent = $context['_parent'];
+        unset($context['_seq'], $context['_iterated'], $context['_key'], $context['priority'], $context['_parent'], $context['loop']);
+        $context = array_intersect_key($context, $_parent) + $_parent;
+        // line 60
+        echo "                                </select>
                             </div>
                         </div>
                         <input type=\"hidden\" name=\"moduleAction\" value=\"add\" />
@@ -195,7 +209,7 @@ class __TwigTemplate_73415d0b48fd136b53658e1563cb93f20f3c45337569f756f6e8b4ee34d
 
     public function getDebugInfo()
     {
-        return array (  168 => 108,  156 => 102,  148 => 97,  140 => 94,  136 => 92,  132 => 91,  88 => 50,  37 => 1,);
+        return array (  182 => 108,  170 => 102,  162 => 97,  154 => 94,  150 => 92,  146 => 91,  113 => 60,  102 => 58,  98 => 57,  88 => 50,  37 => 1,);
     }
 
     public function getSourceContext()

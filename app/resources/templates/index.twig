@@ -54,9 +54,9 @@
                             <label for="priority" class="col-sm-3 control-label">Prioriteit</label>
                             <div class="col-sm-9">
                                 <select name="priority" id="priority" class="form-control">
-                                    <option value="low" selected="selected">low</option>
-                                    <option value="normal">normal</option>
-                                    <option value="high">high</option>
+                                {% for priority in priorities %}
+                                    <option value="{{ priority }}" selected="selected">{{ priority }}</option>
+                                {% endfor %}
                                 </select>
                             </div>
                         </div>
