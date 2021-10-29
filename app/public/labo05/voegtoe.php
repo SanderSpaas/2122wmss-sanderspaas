@@ -48,9 +48,10 @@ if ($moduleAction == 'processName') {
 
     // end of form check. If $allOk still is true, then the form was sent in correctly
     if ($allOk) {
-        header('Location: bedrijven.php');
         $stmt = $connection->prepare('INSERT INTO companies (name, address, zip, city, activity, vat, date_added) VALUES (?, ?, ?, ? ,? ,?, ?)');
         $result = $stmt->executeStatement([$name, $address, $zip, $city, $activity, $vat, $date_added]);
+        header('Location: bedrijven.php');
+        exit();
     }
 }
 
