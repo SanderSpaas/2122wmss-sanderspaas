@@ -33,14 +33,17 @@
                 </div>
                 <div class="panel-body">
                     <!-- Display Validation Errors -->
+                    {% if errors|length != 0 %} 
                     <div class="alert alert-danger">
-                        <strong>Hier is iets misgegaan.</strong>
-                        <br><br>
+                    <strong>Hier is iets misgegaan.</strong>
+                    <br><br>
                         <ul>
-                            <li>Voer een naam in voor je taak</li>
-                            <li>Ongeldige prioriteit geselecteerd</li>
-                        </ul>
+                        {% for error in errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                     </ul>
                     </div>
+                    {% endif %}
                     <!-- New Task Form -->
                     <form action="index.php" method="POST" class="form-horizontal">
                         <!-- Task Name -->

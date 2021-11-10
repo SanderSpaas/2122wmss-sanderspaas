@@ -20,7 +20,7 @@ $twig = new Twig\Environment($loader, [
 ]);
 // Initial Values
 $priorities = ['low', 'normal', 'high']; // The possible priorities of a task
-$formErrors = []; // The encountered form errors
+$formErrors = [ ]; // The encountered form errors
 
 $what = isset($_POST['what']) ? $_POST['what'] : ''; 
 $priority = isset($_POST['priority']) ? $_POST['priority'] : 'low';
@@ -31,6 +31,7 @@ if (isset($_POST['moduleAction']) && ($_POST['moduleAction'] === 'add')) {
         try{
             $statement = $connection->prepare('INSERT INTO tasks (name, priority, added_on) VALUES (?,?,NOW())');
             $result = $statement->executeStatement([$what, $priority]);
+            // @TODO if insert query succeeded: redirect to this very same page
             header('Location: index.php');
             exit();
         }catch(Exception $e){
@@ -43,7 +44,6 @@ if (isset($_POST['moduleAction']) && ($_POST['moduleAction'] === 'add')) {
     if (!in_array(trim($priority), $priorities)){
         array_push($formErrors, "Ongeldige prioriteit geselecteerd");
     }
-    // @TODO if insert query succeeded: redirect to this very same page
 
 }
 
@@ -58,7 +58,6 @@ $variables = [
     'tasks' => $tasks,
     'errors' => $formErrors,
     'VarWhat' => $what,
-    'VarPriority' => $priority,
     'priorities' => $priorities,
 ];
 
