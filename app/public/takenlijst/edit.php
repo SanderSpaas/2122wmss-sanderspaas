@@ -27,7 +27,6 @@ $id = isset($_GET['id']) ? (int) $_GET['id'] : 0; // The id of the task passed b
 // $postID = isset($_POST['id']) ? (int) $_POST['id'] : 0;
 $what = isset($_POST['what']) ? $_POST['what'] : ''; // The task that was sent via the form
 $priority = isset($_POST['priority']) ? $_POST['priority'] : 'low'; // The priority that was sent via the form
-$tasks = [];
 
 
 // check if item exists (use the id from the $_POST array!)
