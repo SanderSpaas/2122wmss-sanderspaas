@@ -25,8 +25,6 @@ $formErrors = []; // The encountered form errors
 
 $id = isset($_GET['id']) ? (int) $_GET['id'] : 0; // The id of the task passed by the URL
 // $postID = isset($_POST['id']) ? (int) $_POST['id'] : 0;
-$what = isset($_POST['what']) ? $_POST['what'] : ''; // The task that was sent via the form
-$priority = isset($_POST['priority']) ? $_POST['priority'] : 'low'; // The priority that was sent via the form
 $tasks = [];
 
 
@@ -41,30 +39,21 @@ if (count($tasks) <= 0) {
     exit();
 }
 
-// echo "UPDATE tasks SET name=$what priority=$priority WHERE id=$id";
-// Handle action 'edit' (user pressed edit button)
-if (isset($_POST['moduleAction']) && ($_POST['moduleAction'] == 'edit')) {
-
-    if (trim($what) !== '' && in_array(trim($priority), $priorities)) {
-        try {
-            // @TODO if no errors: updates values in the database
-            $statement = $connection->prepare('UPDATE tasks SET name=?, priority=?, added_on=NOW() WHERE id=?');
-            $result = $statement->executeStatement([$what, $priority, $id]);
-            // @TODO if query succeeded: redirect to index.php
-            header('Location: index.php');
-            exit();
-        } catch (Exception $e) {
-            // @TODO (if an error was encountered, add it to the $formErrors array)
-            array_push($formErrors, 'Er is een fout bij het sturen naar de database: ' . $e);
-        }
-    }
-    if (trim($what) == '') {
-        array_push($formErrors, "Voer een naam in voor je taak!");
-    }
-    if (!in_array(trim($priority), $priorities)) {
-        array_push($formErrors, "Ongeldige prioriteit geselecteerd");
+// Handle action 'delete' (user pressed delete button)
+if (isset($_POST['moduleAction']) && ($_POST['moduleAction'] == 'delete')) {
+    try {
+        // @TODO if no errors: deletes values in the database
+        $statement = $connection->prepare('DELETE FROM tasks WHERE id=?');
+        $result = $statement->executeStatement([$id]);
+        // @TODO if query succeeded: redirect to index.php
+        header('Location: index.php');
+        exit();
+    } catch (Exception $e) {
+        // @TODO (if an error was encountered, add it to the $formErrors array)
+        array_push($formErrors, 'Er is een fout bij het sturen naar de database: ' . $e);
     }
 }
+
 
 
 
@@ -81,5 +70,5 @@ $variables = [
 // @TODO If the form has not been sent, overwrite the $what and $priority parameters
 
 // render template and persist $what and $priority 
-$template = $twig->load('edit.twig');
+$template = $twig->load('delete.twig');
 echo $template->render($variables);

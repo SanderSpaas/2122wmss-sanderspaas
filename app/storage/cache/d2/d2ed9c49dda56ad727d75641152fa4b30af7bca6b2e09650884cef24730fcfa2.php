@@ -68,35 +68,11 @@ class __TwigTemplate_73415d0b48fd136b53658e1563cb93f20f3c45337569f756f6e8b4ee34d
                     Nieuwe taak
                 </div>
                 <div class=\"panel-body\">
-                    <!-- Display Validation Errors -->
-                    ";
+                 <!-- Display Validation Errors -->
+                   ";
         // line 36
-        if ((twig_length_filter($this->env, ($context["errors"] ?? null)) != 0)) {
-            echo " 
-                    <div class=\"alert alert-danger\">
-                    <strong>Hier is iets misgegaan.</strong>
-                    <br><br>
-                        <ul>
-                        ";
-            // line 41
-            $context['_parent'] = $context;
-            $context['_seq'] = twig_ensure_traversable(($context["errors"] ?? null));
-            foreach ($context['_seq'] as $context["_key"] => $context["error"]) {
-                // line 42
-                echo "                            <li>";
-                echo twig_escape_filter($this->env, $context["error"], "html", null, true);
-                echo "</li>
-                        ";
-            }
-            $_parent = $context['_parent'];
-            unset($context['_seq'], $context['_iterated'], $context['_key'], $context['error'], $context['_parent'], $context['loop']);
-            $context = array_intersect_key($context, $_parent) + $_parent;
-            // line 44
-            echo "                     </ul>
-                    </div>
-                    ";
-        }
-        // line 47
+        $this->loadTemplate("partials/formErrors.twig", "index.twig", 36)->display($context);
+        // line 37
         echo "                    <!-- New Task Form -->
                     <form action=\"index.php\" method=\"POST\" class=\"form-horizontal\">
                         <!-- Task Name -->
@@ -104,7 +80,7 @@ class __TwigTemplate_73415d0b48fd136b53658e1563cb93f20f3c45337569f756f6e8b4ee34d
                             <label for=\"what\" class=\"col-sm-3 control-label\">Taak</label>
                             <div class=\"col-sm-9\">
                                 <input type=\"text\" name=\"what\" id=\"what\" class=\"form-control\" value=\"";
-        // line 53
+        // line 43
         echo twig_escape_filter($this->env, ($context["name"] ?? null), "html", null, true);
         echo "\">
                             </div>
@@ -114,11 +90,11 @@ class __TwigTemplate_73415d0b48fd136b53658e1563cb93f20f3c45337569f756f6e8b4ee34d
                             <div class=\"col-sm-9\">
                                 <select name=\"priority\" id=\"priority\" class=\"form-control\">
                                 ";
-        // line 60
+        // line 50
         $context['_parent'] = $context;
         $context['_seq'] = twig_ensure_traversable(($context["priorities"] ?? null));
         foreach ($context['_seq'] as $context["_key"] => $context["priority"]) {
-            // line 61
+            // line 51
             echo "                                    <option value=\"";
             echo twig_escape_filter($this->env, $context["priority"], "html", null, true);
             echo "\" selected=\"selected\">";
@@ -129,7 +105,7 @@ class __TwigTemplate_73415d0b48fd136b53658e1563cb93f20f3c45337569f756f6e8b4ee34d
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['priority'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 63
+        // line 53
         echo "                                </select>
                             </div>
                         </div>
@@ -162,32 +138,32 @@ class __TwigTemplate_73415d0b48fd136b53658e1563cb93f20f3c45337569f756f6e8b4ee34d
                         </thead>
                         <tbody>
                             ";
-        // line 94
+        // line 84
         $context['_parent'] = $context;
         $context['_seq'] = twig_ensure_traversable(($context["tasks"] ?? null));
         foreach ($context['_seq'] as $context["_key"] => $context["task"]) {
-            // line 95
+            // line 85
             echo "                            <tr>
                                 <td class=\"table-text\">
                                     <div class=\"item ";
-            // line 97
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["task"], "priority", [], "any", false, false, false, 97), "html", null, true);
+            // line 87
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["task"], "priority", [], "any", false, false, false, 87), "html", null, true);
             echo "\">";
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["task"], "name", [], "any", false, false, false, 97), "html", null, true);
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["task"], "name", [], "any", false, false, false, 87), "html", null, true);
             echo "</div>
                                 </td>
                                 <td>
                                     <a class=\"btn btn-primary\" href=\"edit.php?id=";
-            // line 100
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["task"], "id", [], "any", false, false, false, 100), "html", null, true);
+            // line 90
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["task"], "id", [], "any", false, false, false, 90), "html", null, true);
             echo "\" role=\"button\">
                                         <i class=\"fa fa-btn fa-pencil\"></i>Wijzigen
                                     </a>
                                 </td>
                                 <td>
                                     <a class=\"btn btn-danger\" href=\"delete.php?id=";
-            // line 105
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["task"], "id", [], "any", false, false, false, 105), "html", null, true);
+            // line 95
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["task"], "id", [], "any", false, false, false, 95), "html", null, true);
             echo "\" role=\"button\">
                                         <i class=\"fa fa-btn fa-trash\"></i>Verwijderen
                                     </a>
@@ -198,7 +174,7 @@ class __TwigTemplate_73415d0b48fd136b53658e1563cb93f20f3c45337569f756f6e8b4ee34d
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['task'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 111
+        // line 101
         echo "                        </tbody>
                     </table>
                 </div>
@@ -229,7 +205,7 @@ class __TwigTemplate_73415d0b48fd136b53658e1563cb93f20f3c45337569f756f6e8b4ee34d
 
     public function getDebugInfo()
     {
-        return array (  202 => 111,  190 => 105,  182 => 100,  174 => 97,  170 => 95,  166 => 94,  133 => 63,  122 => 61,  118 => 60,  108 => 53,  100 => 47,  95 => 44,  86 => 42,  82 => 41,  74 => 36,  37 => 1,);
+        return array (  178 => 101,  166 => 95,  158 => 90,  150 => 87,  146 => 85,  142 => 84,  109 => 53,  98 => 51,  94 => 50,  84 => 43,  76 => 37,  74 => 36,  37 => 1,);
     }
 
     public function getSourceContext()

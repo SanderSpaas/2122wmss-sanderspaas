@@ -32,18 +32,8 @@
                     Nieuwe taak
                 </div>
                 <div class="panel-body">
-                    <!-- Display Validation Errors -->
-                    {% if errors|length != 0 %} 
-                    <div class="alert alert-danger">
-                    <strong>Hier is iets misgegaan.</strong>
-                    <br><br>
-                        <ul>
-                        {% for error in errors %}
-                            <li>{{ error }}</li>
-                        {% endfor %}
-                     </ul>
-                    </div>
-                    {% endif %}
+                 <!-- Display Validation Errors -->
+                   {% include "partials/formErrors.twig" %}
                     <!-- New Task Form -->
                     <form action="index.php" method="POST" class="form-horizontal">
                         <!-- Task Name -->

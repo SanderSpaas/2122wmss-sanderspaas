@@ -57,7 +57,6 @@ $tasks = $query->fetchAllAssociative();
 $variables = [
     'tasks' => $tasks,
     'errors' => $formErrors,
-    'VarWhat' => $what,
     'priorities' => $priorities,
 ];
 
