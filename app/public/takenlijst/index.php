@@ -1,5 +1,9 @@
 <?php
-
+session_start();
+if ($_SESSION['logged_in'] == false) {
+    header('Location: login.php');
+    exit();
+}
 /**
  * Lab 06 — Start from this version
  * Tasklist
@@ -58,6 +62,7 @@ $variables = [
     'tasks' => $tasks,
     'errors' => $formErrors,
     'priorities' => $priorities,
+    'login' => $name = isset($_SESSION['logged_in']) ? $_SESSION['logged_in'] : 'unset',
 ];
 
 

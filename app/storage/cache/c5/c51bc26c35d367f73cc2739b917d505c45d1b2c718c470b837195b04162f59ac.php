@@ -24,133 +24,85 @@ class __TwigTemplate_11f848f28529996e5f859086df5035df8c5737294066f801076fa048d3f
 
         $this->source = $this->getSourceContext();
 
-        $this->parent = false;
-
         $this->blocks = [
+            'content' => [$this, 'block_content'],
         ];
+    }
+
+    protected function doGetParent(array $context)
+    {
+        // line 1
+        return "layout.twig";
     }
 
     protected function doDisplay(array $context, array $blocks = [])
     {
         $macros = $this->macros;
-        // line 1
-        echo "<!DOCTYPE html>
-<html lang=\"nl\">
-";
-        // line 4
-        echo "    <head>
-        <meta charset=\"utf-8\">
-        <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">
-        <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">
-        <title>
-            Mijn takenlijst                 
-        </title>
-        <!-- Fonts -->
-        <link href=\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css\" rel='stylesheet' type='text/css'>
-        <link href=\"https://fonts.googleapis.com/css?family=Lato:100,300,400,700\" rel='stylesheet' type='text/css'>
-        <!-- Styles -->
-        <link href=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css\" rel=\"stylesheet\">
-        <link href=\"css/tasks.css\" rel=\"stylesheet\">
-    </head>
-    <body id=\"app-layout\">
-        <nav class=\"navbar navbar-default\">
-            <div class=\"container\">
-                <div class=\"navbar-header\">
-                    <!-- Just an image -->
-                    <a class=\"navbar-brand\" href=\"index.php\">
-                        <img src=\"img/ikdoeict.png\" height=\"20\" alt=\"ikdoeict alt logo\">
-                    </a>
-                    <a class=\"navbar-brand\" href=\"index.php\">
-                        Mijn takenlijst
-                                                                                                                    
-                                                                                            
-                                                                    
-                                            
-                    </a>
-                </div>
-                <!-- Weer te geven indien niet ingelogd -->
-                <ul class=\"nav navbar-nav navbar-right\">
-                    <li>
-                        <a href=\"login.php\">
-                            Inloggen
-                                                                                                                                        
-                                                                                                            
-                                                                                
-                                                    
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-        <div class=\"container\">
+        $this->parent = $this->loadTemplate("layout.twig", "edit.twig", 1);
+        $this->parent->display($context, array_merge($this->blocks, $blocks));
+    }
+
+    // line 2
+    public function block_content($context, array $blocks = [])
+    {
+        $macros = $this->macros;
+        // line 3
+        echo "        <div class=\"container\">
             <div class=\"col-sm-offset-2 col-sm-8\">
                 <div class=\"panel panel-default\">
                     <div class=\"panel-heading\">
-                        Taak wijzigen
-                                                                                                                                        
-                                                                                                                    
-                                                                                            
-                                                                    
-                                            
+                        Taak wijzigen                
                     </div>
                     <div class=\"panel-body\">
                         <!-- Display Validation Errors -->
                         ";
-        // line 61
-        $this->loadTemplate("partials/formErrors.twig", "edit.twig", 61)->display($context);
-        // line 62
+        // line 11
+        $this->loadTemplate("partials/formErrors.twig", "edit.twig", 11)->display($context);
+        // line 12
         echo "                        <!-- Task Edit Form -->
                         <form action=\"edit.php?id=";
-        // line 63
+        // line 13
         echo twig_escape_filter($this->env, ($context["id"] ?? null), "html", null, true);
         echo "\" method=\"POST\" class=\"form-horizontal\">
                             <!-- Task Name -->
                             ";
-        // line 65
+        // line 15
         $context['_parent'] = $context;
         $context['_seq'] = twig_ensure_traversable(($context["tasks"] ?? null));
         foreach ($context['_seq'] as $context["_key"] => $context["task"]) {
-            // line 66
+            // line 16
             echo "                                <div class=\"form-group\">
                                     <label for=\"what\" class=\"col-sm-3 control-label\">
-                                        Taak
-                                                                                                                                                                                                
-                                                                                                                                                            
-                                                                                                                    
-                                                                            
+                                        Taak                                      
                                     </label>
                                     <div class=\"col-sm-9\">
                                         <input type=\"text\" name=\"what\" id=\"what\" class=\"form-control\" value=\"";
-            // line 75
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["task"], "name", [], "any", false, false, false, 75), "html", null, true);
+            // line 21
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["task"], "name", [], "any", false, false, false, 21), "html", null, true);
             echo "\">
                                     </div>
                                 </div>
                                 <div class=\"form-group\">
                                     <label for=\"priority\" class=\"col-sm-3 control-label\">
-                                        Prioriteit
-                                                                                                                                                                                                
-                                                                                                                                                            
-                                                                                      
-                                                                            
+                                        Prioriteit                                       
                                     </label>
                                     <div class=\"col-sm-9\">
                                         <select name=\"priority\" id=\"priority\" class=\"form-control\">
                                             ";
-            // line 88
+            // line 30
             $context['_parent'] = $context;
             $context['_seq'] = twig_ensure_traversable(($context["priorities"] ?? null));
             foreach ($context['_seq'] as $context["_key"] => $context["priority"]) {
-                // line 89
+                // line 31
                 echo "                                                <option option value=\"";
                 echo twig_escape_filter($this->env, $context["priority"], "html", null, true);
                 echo "\" ";
-                if (($context["priority"] == twig_get_attribute($this->env, $this->source, $context["task"], "priority", [], "any", false, false, false, 89))) {
+                if (($context["priority"] == twig_get_attribute($this->env, $this->source, $context["task"], "priority", [], "any", false, false, false, 31))) {
                     echo " selected=\"selected\" ";
                 }
                 echo ">
                                                     ";
-                // line 90
+                // line 32
                 echo twig_escape_filter($this->env, $context["priority"], "html", null, true);
                 echo "
                                                 </option>
@@ -159,21 +111,21 @@ class __TwigTemplate_11f848f28529996e5f859086df5035df8c5737294066f801076fa048d3f
             $_parent = $context['_parent'];
             unset($context['_seq'], $context['_iterated'], $context['_key'], $context['priority'], $context['_parent'], $context['loop']);
             $context = array_intersect_key($context, $_parent) + $_parent;
-            // line 93
+            // line 35
             echo "                                        </select>
                                     </div>
                                 </div>
                                 <input type=\"hidden\" name=\"moduleAction\" value=\"edit\" />
                                 <input type=\"hidden\" name=\"id\" value=\"";
-            // line 97
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["task"], "id", [], "any", false, false, false, 97), "html", null, true);
+            // line 39
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["task"], "id", [], "any", false, false, false, 39), "html", null, true);
             echo "\" />
                             ";
         }
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['task'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 99
+        // line 41
         echo "                            <!-- Add Task Button -->
                             <div class=\"form-group\">
                                 <div class=\"col-sm-offset-3 col-sm-6\">
@@ -200,18 +152,10 @@ class __TwigTemplate_11f848f28529996e5f859086df5035df8c5737294066f801076fa048d3f
                     </div>
                 </div>
             </div>
-        </body>
-    </body>
-</html></div><footer class=\"footer mt-auto py-3\">
-<div class=\"container\">
-    <span class=\"text-muted\">
-        &copy; 2020 Odisee &mdash; Opleiding Elektronica-ICT &mdash; Server-side Web Scripting
-                                                            
-                                        
-                    
-            
-    </span>
-</div></footer><!-- JavaScripts --><script src=\"https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js\"></script><script src=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js\"></script><script src=\"js/edit.js\"></script></body></html>";
+        
+
+</div>
+";
     }
 
     public function getTemplateName()
@@ -226,7 +170,7 @@ class __TwigTemplate_11f848f28529996e5f859086df5035df8c5737294066f801076fa048d3f
 
     public function getDebugInfo()
     {
-        return array (  177 => 99,  169 => 97,  163 => 93,  154 => 90,  145 => 89,  141 => 88,  125 => 75,  114 => 66,  110 => 65,  105 => 63,  102 => 62,  100 => 61,  41 => 4,  37 => 1,);
+        return array (  129 => 41,  121 => 39,  115 => 35,  106 => 32,  97 => 31,  93 => 30,  81 => 21,  74 => 16,  70 => 15,  65 => 13,  62 => 12,  60 => 11,  50 => 3,  46 => 2,  35 => 1,);
     }
 
     public function getSourceContext()

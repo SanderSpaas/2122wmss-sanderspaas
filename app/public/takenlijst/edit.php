@@ -1,5 +1,9 @@
 <?php
-
+session_start();
+if ($_SESSION['logged_in'] == false) {
+    header('Location: login.php');
+    exit();
+}
 /**
  * Lab 06 — Start from this version
  * Tasklist
@@ -24,16 +28,16 @@ $priorities = ['low', 'normal', 'high']; // The possible priorities of a task
 $formErrors = []; // The encountered form errors
 
 $id = isset($_GET['id']) ? (int) $_GET['id'] : 0; // The id of the task passed by the URL
-// $postID = isset($_POST['id']) ? (int) $_POST['id'] : 0;
 $what = isset($_POST['what']) ? $_POST['what'] : ''; // The task that was sent via the form
 $priority = isset($_POST['priority']) ? $_POST['priority'] : 'low'; // The priority that was sent via the form
 
 
 // check if item exists (use the id from the $_POST array!)
 // @TODO Get the item from the database
+$id = (int) $_POST['id'];
 $query = 'SELECT * FROM tasks WHERE id=' . $id . '';
 $query = $connection->query($query);
-$tasks = $query->fetchAllAssociative();
+$tasks = $query->fetchAssociative();
 if (count($tasks) <= 0) {
     // @TODO Check if the passed id (in $_GET) exists as a task item (if it fails, redirect to index.php)
     header('Location: index.php');
@@ -72,6 +76,7 @@ $variables = [
     'tasks' => $tasks,
     'errors' => $formErrors,
     'priorities' => $priorities,
+    'login' => $name = isset($_SESSION['logged_in']) ? $_SESSION['logged_in'] : 'unset',
 ];
 // No action to handle: show edit page
 

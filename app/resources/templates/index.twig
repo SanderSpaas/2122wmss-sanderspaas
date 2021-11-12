@@ -1,52 +1,10 @@
-<!DOCTYPE html>
-<html lang="nl">
-{% block head %}
-    <head>
-            <meta charset="utf-8">
-            <meta http-equiv="X-UA-Compatible" content="IE=edge">
-            <meta name="viewport" content="width=device-width, initial-scale=1">
-            <title>
-                Mijn takenlijst  
-            </title>
-            <!-- Fonts -->
-            <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel='stylesheet' type='text/css'>
-            <link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700" rel='stylesheet' type='text/css'>
-            <!-- Styles -->
-            <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
-            <link href="css/tasks.css" rel="stylesheet">
-    </head>
-    <body id="app-layout">
-        <nav class="navbar navbar-default">
-            <div class="container">
-                <div class="navbar-header">
-                    <!-- Just an image -->
-                    <a class="navbar-brand" href="index.php">
-                        <img src="img/ikdoeict.png" height="20" alt="ikdoeict alt logo">
-                    </a>
-                    <a class="navbar-brand" href="index.php">
-                        Mijn takenlijst
-                                            
-                    </a>
-                </div>
-                <!-- Weer te geven indien niet ingelogd -->
-                <ul class="nav navbar-nav navbar-right">
-                    <li>
-                        <a href="login.php">
-                            Inloggen
-                                                    
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-    {% endblock %}
+{% extends "layout.twig" %}
+{% block content %}
         <div class="container">
             <div class="col-sm-offset-2 col-sm-8">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        Nieuwe taak
-                                                                
-                                            
+                        Nieuwe taak                   
                     </div>
                     <div class="panel-body">
                         <!-- Display Validation Errors -->
@@ -56,8 +14,7 @@
                             <!-- Task Name -->
                             <div class="form-group">
                                 <label for="what" class="col-sm-3 control-label">
-                                    Taak
-                                                                    
+                                    Taak                           
                                 </label>
                                 <div class="col-sm-9">
                                     <input type="text" name="what" id="what" class="form-control" value="{{ name }}">
@@ -84,9 +41,7 @@
                                 <div class="col-sm-offset-3 col-sm-6">
                                     <button type="submit" class="btn btn-default">
                                         <i class="fa fa-btn fa-plus"></i>
-                                        Voeg taak toe
-                                                                                                                
-                                                                            
+                                        Voeg taak toe                                    
                                     </button>
                                 </div>
                             </div>
@@ -96,9 +51,7 @@
                 <!-- Current Tasks -->
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        Huidige taken
-                                                                
-                                            
+                        Huidige taken                   
                     </div>
                     <div class="panel-body">
 
@@ -151,17 +104,4 @@
                 </div>
             </div>
         </div>
-        <footer class="footer mt-auto py-3">
-            <div class="container">
-                <span class="text-muted">
-                    &copy; 2020 Odisee &mdash; Opleiding Elektronica-ICT &mdash; Server-side Web Scripting
-                                    
-                </span>
-            </div>
-        </footer>
-        <!-- JavaScripts -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-        <script src="js/index.js"></script>
-    </body>
-</html>
+    {% endblock %}
