@@ -26,26 +26,17 @@ $password = isset($_POST['password']) ? $_POST['password'] : '';
 
 // Handle action 'add' (user pressed add button)
 if (isset($_POST['moduleAction']) && ($_POST['moduleAction'] === 'login')) {
-    if (trim($username) !== '' && trim($password) !== '') {
-            $statement = $connection->prepare('SELECT username, password FROM Users WHERE username =? AND  password =?');
-            $result = $statement->executeStatement([$username, $password]);
-            // $tasks = $query->fetchAssociative();
-            //check if username and password is actually correct
-            echo $result;
-            echo $result2;
-            echo $username;
-            echo $password;
-            
-            // if ($result == $username && password_verify($_POST['password'], $result2)) {
-                $_SESSION["logged_in"] = true;
-                $_SESSION["username"] = $username;
-                // @TODO if login succesfull redirect to index
-                header('Location: index.php');
-                exit();
-            // }else{
-                array_push($formErrors, 'Gebruikersnaam of paswoord is incorrect.');
-            // }
-    }else{
+    $passfetch = $connection->executeQuery('SELECT password FROM users WHERE username = ?', array($username));
+    $pass = $passfetch->fetchAssociative();
+    print_r($pass);
+    // password_verify(string $password, string $hash): bool
+    if (password_verify($password, $pass['password'])) {
+        $_SESSION["logged_in"] = true;
+        $_SESSION["username"] = $username;
+        // @TODO if login succesfull redirect to index
+        header('Location: index.php');
+        exit();
+    } else {
         array_push($formErrors, 'Gebruikersnaam of paswoord is incorrect.');
     }
 }
