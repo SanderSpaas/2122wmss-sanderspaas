@@ -25,14 +25,10 @@ $twig = new Twig\Environment($loader, [
 // Initial Values
 $priorities = ['low', 'normal', 'high']; // The possible priorities of a task
 $formErrors = []; // The encountered form errors
-$username = $_SESSION['username'];
+$id = $_SESSION['user_id'];
 
 $what = isset($_POST['what']) ? $_POST['what'] : '';
 $priority = isset($_POST['priority']) ? $_POST['priority'] : 'low';
-
-//met de username een query gaan uitvoeren die ons het id gaat geven
-$userfetch = $connection->executeQuery('SELECT id FROM users WHERE username = ? ', array($username));
-$id = $userfetch->fetchAssociative();
 
 // Handle action 'add' (user pressed add button)
 if (isset($_POST['moduleAction']) && ($_POST['moduleAction'] === 'add')) {
@@ -57,13 +53,9 @@ if (isset($_POST['moduleAction']) && ($_POST['moduleAction'] === 'add')) {
 
 // No action to handle: show our page itself
 
-// // @TODO get all task items from the databases with the current user id
-// $tasksfetch = $connection->executeQuery('SELECT * FROM tasks WHERE user_id = ?', array($id));
-// $tasks = $tasksfetch->fetchAllAssociative();
-$sql = "SELECT * FROM tasks WHERE user_id = ?";
-$stmt = $connection->prepare($sql);
-$stmt->bindValue(1, $id);
-$tasks = $stmt->executeQuery();
+// @TODO get all task items from the databases with the current user id
+$tasksfetch = $connection->executeQuery('SELECT * FROM tasks WHERE user_id = ?', array($id));
+$tasks = $tasksfetch->fetchAllAssociative();
 
 $variables = [
     'tasks' => $tasks,

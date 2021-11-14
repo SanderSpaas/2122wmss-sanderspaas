@@ -26,7 +26,7 @@ $twig = new Twig\Environment($loader, [
 // Initial Values
 $priorities = ['low', 'normal', 'high']; // The possible priorities of a task
 $formErrors = []; // The encountered form errors
-
+$user_id = $_SESSION['user_id'];
 $id = isset($_GET['id']) ? (int) $_GET['id'] : 0; // The id of the task passed by the URL
 // $postID = isset($_POST['id']) ? (int) $_POST['id'] : 0;
 $tasks = [];
@@ -34,15 +34,15 @@ $tasks = [];
 
 // check if item exists (use the id from the $_POST array!)
 // @TODO Get the item from the database
-$query = 'SELECT * FROM tasks WHERE id=' . $id . '';
-$query = $connection->query($query);
-$tasks = $query->fetchAllAssociative();
-if (count($tasks) <= 0) {
+
+$tasksfetch = $connection->executeQuery('SELECT * FROM tasks WHERE id=?', array($id));
+$tasks = $tasksfetch->fetchAllAssociative();
+$task = $tasks[0];
+if (count($tasks) <= 0 || $task['user_id'] !== $user_id) {
     // @TODO Check if the passed id (in $_GET) exists as a task item (if it fails, redirect to index.php)
     header('Location: index.php');
     exit();
 }
-
 // Handle action 'delete' (user pressed delete button)
 if (isset($_POST['moduleAction']) && ($_POST['moduleAction'] == 'delete')) {
     try {

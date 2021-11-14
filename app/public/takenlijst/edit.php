@@ -30,15 +30,16 @@ $formErrors = []; // The encountered form errors
 $id = isset($_GET['id']) ? (int) $_GET['id'] : 0; // The id of the task passed by the URL
 $what = isset($_POST['what']) ? $_POST['what'] : ''; // The task that was sent via the form
 $priority = isset($_POST['priority']) ? $_POST['priority'] : 'low'; // The priority that was sent via the form
+$user_id = $_SESSION['user_id'];
 
 
 // check if item exists (use the id from the $_POST array!)
 // @TODO Get the item from the database
-$id = (int) $_POST['id'];
-$query = 'SELECT * FROM tasks WHERE id=' . $id . '';
-$query = $connection->query($query);
-$tasks = $query->fetchAssociative();
-if (count($tasks) <= 0) {
+// $id = (int) $_POST['id'];
+$tasksfetch = $connection->executeQuery('SELECT * FROM tasks WHERE id=?', array($id));
+$tasks = $tasksfetch->fetchAllAssociative();
+$task = $tasks[0];
+if (count($tasks) <= 0 || $task['user_id'] !== $user_id) {
     // @TODO Check if the passed id (in $_GET) exists as a task item (if it fails, redirect to index.php)
     header('Location: index.php');
     exit();

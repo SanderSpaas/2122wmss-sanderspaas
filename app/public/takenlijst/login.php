@@ -31,8 +31,11 @@ if (isset($_POST['moduleAction']) && ($_POST['moduleAction'] === 'login')) {
     print_r($pass);
     // password_verify(string $password, string $hash): bool
     if (password_verify($password, $pass['password'])) {
+        //met de username een query gaan uitvoeren die ons het id gaat geven
+        $userfetch = $connection->executeQuery('SELECT id FROM users WHERE username = ? ', array($username));
+        $id = $userfetch->fetchAssociative();
         $_SESSION["logged_in"] = true;
-        $_SESSION["username"] = $username;
+        $_SESSION["user_id"] = $id['id'];
         // @TODO if login succesfull redirect to index
         header('Location: index.php');
         exit();
