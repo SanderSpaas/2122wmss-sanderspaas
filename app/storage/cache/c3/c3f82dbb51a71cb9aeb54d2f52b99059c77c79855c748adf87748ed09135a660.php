@@ -12,8 +12,8 @@ use Twig\Sandbox\SecurityNotAllowedFunctionError;
 use Twig\Source;
 use Twig\Template;
 
-/* login.twig */
-class __TwigTemplate_ae5da61b683ab70f711582f4a6038fd7355c413c2464006b01ba8253266b7dae extends Template
+/* registration.twig */
+class __TwigTemplate_ef0b5311c9939dd8d23bb48bd997310f5e7eb9ba1726d102ff539e1d9f84c81a extends Template
 {
     private $source;
     private $macros = [];
@@ -38,7 +38,7 @@ class __TwigTemplate_ae5da61b683ab70f711582f4a6038fd7355c413c2464006b01ba8253266
     protected function doDisplay(array $context, array $blocks = [])
     {
         $macros = $this->macros;
-        $this->parent = $this->loadTemplate("layout.twig", "login.twig", 1);
+        $this->parent = $this->loadTemplate("layout.twig", "registration.twig", 1);
         $this->parent->display($context, array_merge($this->blocks, $blocks));
     }
 
@@ -51,17 +51,17 @@ class __TwigTemplate_ae5da61b683ab70f711582f4a6038fd7355c413c2464006b01ba8253266
         <div class=\"col-sm-offset-2 col-sm-8\">
             <div class=\"panel panel-default\">
                 <div class=\"panel-heading\">
-                    Inloggen
+                    Registreren
                                     
                 </div>
                 <div class=\"panel-body\">
                     <!-- Display Validation Errors -->
                     ";
         // line 12
-        $this->loadTemplate("partials/formErrors.twig", "login.twig", 12)->display($context);
+        $this->loadTemplate("partials/formErrors.twig", "registration.twig", 12)->display($context);
         // line 13
         echo "                    <!-- Task Edit Form -->
-                    <form action=\"login.php\" method=\"POST\" class=\"form-horizontal\">
+                    <form action=\"registration.php\" method=\"POST\" class=\"form-horizontal\">
                         <!-- Task Name -->
                         <div class=\"form-group\">
                             <label for=\"username\" class=\"col-sm-3 control-label\">
@@ -77,42 +77,16 @@ class __TwigTemplate_ae5da61b683ab70f711582f4a6038fd7355c413c2464006b01ba8253266
                                 <div class=\"col-sm-9\">
                                     <input type=\"password\" name=\"password\" id=\"password\" class=\"form-control\" value=\"\"></div>
                                 </div>
-                                <input type=\"hidden\" name=\"moduleAction\" value=\"login\" />
+                                <input type=\"hidden\" name=\"moduleAction\" value=\"register\" />
                                 <!-- Add Task Button -->
                                 <div class=\"form-group\">
                                     <div class=\"col-sm-offset-3 col-sm-6\">
                                         <button type=\"submit\" class=\"btn btn-default\">
-                                            Inloggen                            
+                                            Registreer                             
                                         </button>
-                                        
                                     </div>
-                                    <div class=\"col-sm-offset-3 col-sm-6\">
-                                         <a href=\"registration.php\" class=\"btn btn-default\">
-                                        Registreren                           
-                                        </a>
-                                    </div>                            
                                 </div>
                             </form>
-                            ";
-        // line 46
-        if (twig_test_empty(($context["cookieInfo"] ?? null))) {
-            // line 47
-            echo "                                <p class=\"text-left\">
-                                    Er werd op dit toestel nog niet ingelogd op deze website.
-                                </p>
-                            ";
-        } else {
-            // line 51
-            echo "                                <p class=\"text-left\">
-                                    ";
-            // line 52
-            echo twig_escape_filter($this->env, ($context["cookieInfo"] ?? null), "html", null, true);
-            echo "
-                                </p>
-                            ";
-        }
-        // line 55
-        echo "
                         </div>
                     </div>
                 </div>
@@ -122,7 +96,7 @@ class __TwigTemplate_ae5da61b683ab70f711582f4a6038fd7355c413c2464006b01ba8253266
 
     public function getTemplateName()
     {
-        return "login.twig";
+        return "registration.twig";
     }
 
     public function isTraitable()
@@ -132,11 +106,11 @@ class __TwigTemplate_ae5da61b683ab70f711582f4a6038fd7355c413c2464006b01ba8253266
 
     public function getDebugInfo()
     {
-        return array (  115 => 55,  109 => 52,  106 => 51,  100 => 47,  98 => 46,  63 => 13,  61 => 12,  50 => 3,  46 => 2,  35 => 1,);
+        return array (  63 => 13,  61 => 12,  50 => 3,  46 => 2,  35 => 1,);
     }
 
     public function getSourceContext()
     {
-        return new Source("", "login.twig", "/var/www/resources/templates/login.twig");
+        return new Source("", "registration.twig", "/var/www/resources/templates/registration.twig");
     }
 }

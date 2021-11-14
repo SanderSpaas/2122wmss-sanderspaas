@@ -4,14 +4,14 @@
         <div class="col-sm-offset-2 col-sm-8">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    Inloggen
+                    Registreren
                                     
                 </div>
                 <div class="panel-body">
                     <!-- Display Validation Errors -->
                     {% include "partials/formErrors.twig" %}
                     <!-- Task Edit Form -->
-                    <form action="login.php" method="POST" class="form-horizontal">
+                    <form action="registration.php" method="POST" class="form-horizontal">
                         <!-- Task Name -->
                         <div class="form-group">
                             <label for="username" class="col-sm-3 control-label">
@@ -27,32 +27,16 @@
                                 <div class="col-sm-9">
                                     <input type="password" name="password" id="password" class="form-control" value=""></div>
                                 </div>
-                                <input type="hidden" name="moduleAction" value="login" />
+                                <input type="hidden" name="moduleAction" value="register" />
                                 <!-- Add Task Button -->
                                 <div class="form-group">
                                     <div class="col-sm-offset-3 col-sm-6">
                                         <button type="submit" class="btn btn-default">
-                                            Inloggen                            
+                                            Registreer                             
                                         </button>
-                                        
                                     </div>
-                                    <div class="col-sm-offset-3 col-sm-6">
-                                         <a href="registration.php" class="btn btn-default">
-                                        Registreren                           
-                                        </a>
-                                    </div>                            
                                 </div>
                             </form>
-                            {% if cookieInfo is empty %}
-                                <p class="text-left">
-                                    Er werd op dit toestel nog niet ingelogd op deze website.
-                                </p>
-                            {% else %}
-                                <p class="text-left">
-                                    {{ cookieInfo }}
-                                </p>
-                            {% endif %}
-
                         </div>
                     </div>
                 </div>

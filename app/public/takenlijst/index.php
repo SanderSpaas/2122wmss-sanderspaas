@@ -35,7 +35,7 @@ if (isset($_POST['moduleAction']) && ($_POST['moduleAction'] === 'add')) {
     if (trim($what) !== '' && in_array(trim($priority), $priorities)) {
         try {
             $statement = $connection->prepare('INSERT INTO tasks (name, priority, user_id, added_on) VALUES (?,?,?,NOW())');
-            $result = $statement->executeStatement([$what, $priority, $id['id']]);
+            $result = $statement->executeStatement([$what, $priority, $id]);
             // @TODO if insert query succeeded: redirect to this very same page
             header('Location: index.php');
             exit();

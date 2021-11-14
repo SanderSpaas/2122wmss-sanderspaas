@@ -25,11 +25,16 @@ $username = isset($_POST['username']) ? $_POST['username'] : '';
 $password = isset($_POST['password']) ? $_POST['password'] : '';
 
 // Handle action 'add' (user pressed add button)
-if (isset($_POST['moduleAction']) && ($_POST['moduleAction'] === 'login')) {
-    $passfetch = $connection->executeQuery('SELECT password FROM users WHERE username = ?', array($username));
-    $pass = $passfetch->fetchAssociative();
-    // password_verify(string $password, string $hash): bool
-    if (password_verify($password, $pass['password'])) {
+if (isset($_POST['moduleAction']) && ($_POST['moduleAction'] === 'register')) {
+    //checking if an account under that name already exists 
+    $tasksfetch = $connection->executeQuery('SELECT username FROM users WHERE username=?', array($username));
+    $tasks = $tasksfetch->fetchAllAssociative();
+    if (count($tasks) > 0) {
+        array_push($formErrors, 'Gebruikersnaam is al in gebruik.');
+    } else {
+        //user aan database gaan toevoegen
+        $statement = $connection->prepare('INSERT INTO users (username, password) VALUES (?,?)');
+        $result = $statement->executeStatement([$username, password_hash($password, PASSWORD_DEFAULT)]);
         //met de username een query gaan uitvoeren die ons het id gaat geven
         $userfetch = $connection->executeQuery('SELECT id FROM users WHERE username = ? ', array($username));
         $id = $userfetch->fetchAssociative();
@@ -45,21 +50,19 @@ if (isset($_POST['moduleAction']) && ($_POST['moduleAction'] === 'login')) {
         // @TODO if login succesfull redirect to index
         header('Location: index.php');
         exit();
-    } else {
-        array_push($formErrors, 'Gebruikersnaam of paswoord is incorrect.');
     }
+} else {
+    array_push($formErrors, 'Gebruikersnaam of paswoord zijn incorrect ingevuld.');
 }
 
-// No action to handle: show our page itself
-$datas = unserialize($_COOKIE['lastLogin']);
+
 //ik stel me vragen bij de veiligheid van dit? de username letterlijk gaan weergeven is al een stap minder die hackers zouden moeten doen
 $variables = [
     'errors' => $formErrors,
     'login' => $name = isset($_SESSION['logged_in']) ? $_SESSION['logged_in'] : 'false',
-    'cookieInfo' => $cookie = 'De laatste login was door: ' . $datas['username'] . ' op ' . $datas['date'] . ' om ' . $datas['time'],
 ];
 
 
 // render template
-$template = $twig->load('login.twig');
+$template = $twig->load('registration.twig');
 echo $template->render($variables);
