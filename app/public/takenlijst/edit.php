@@ -76,7 +76,7 @@ $variables = [
     'tasks' => $tasks,
     'errors' => $formErrors,
     'priorities' => $priorities,
-    'login' => $name = isset($_SESSION['logged_in']) ? $_SESSION['logged_in'] : 'unset',
+    'login' => $name = isset($_SESSION['logged_in']) ? $_SESSION['logged_in'] : 'false',
 ];
 // No action to handle: show edit page
 

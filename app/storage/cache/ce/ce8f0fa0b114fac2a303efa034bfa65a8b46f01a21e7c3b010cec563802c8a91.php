@@ -80,7 +80,7 @@ class __TwigTemplate_286c58f36a9c14be704e4a42fd25ec3b05abadb8dee908a44700e732b52
             $this->loadTemplate("partials/logoutButton.twig", "layout.twig", 32)->display($context);
             // line 33
             echo "                    ";
-        } elseif ((($context["login"] ?? null) == "unset")) {
+        } elseif ((($context["login"] ?? null) == "")) {
             // line 34
             echo "
                     ";

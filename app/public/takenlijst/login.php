@@ -54,7 +54,7 @@ if (isset($_POST['moduleAction']) && ($_POST['moduleAction'] === 'login')) {
 
 $variables = [
     'errors' => $formErrors,
-    'login' => $name = isset($_SESSION['logged_in']) ? $_SESSION['logged_in'] : 'unset',
+    'login' => $name = isset($_SESSION['logged_in']) ? $_SESSION['logged_in'] : 'false',
 ];
 
 
