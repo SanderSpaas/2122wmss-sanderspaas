@@ -13,7 +13,7 @@ class CompaniesController
     public function __construct()
     {
         $this->databaseConnection = \Services\DatabaseConnector::getConnection();
-        $loader = new FilesystemLoader(__DIR__ . '/../../resources/templates');
+        $loader = new FilesystemLoader(__DIR__ . '/../../resources/templates/alela/');
         $this->twigEngine = new Environment($loader, [
             'cache' => __DIR__ . '/../../storage/cache',
             'auto_reload' => true //set to false on production
@@ -24,9 +24,9 @@ class CompaniesController
         $companies = $this->findCompanies('');
         echo $this->twigEngine->render('companies/overview.twig', ['companies' => $companies]);
     }
-    public function search()
+    public function search($term)
     {
-        $companies = $this->findCompanies('');
+        $companies = $this->findCompanies($term);
         echo $this->twigEngine->render('companies/overview.twig', ['companies' => $companies]);
     }
     // public function create()
