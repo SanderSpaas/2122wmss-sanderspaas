@@ -35,6 +35,8 @@ class __TwigTemplate_99ffe29f297a2e7e4e186b253f62efdf38206692e853b8d9486bda57ced
     {
         $macros = $this->macros;
         // line 1
+        $context["imagesPath"] = "/alela/images/";
+        // line 2
         echo "<!DOCTYPE html>
 <html lang=\"en\">
 <head>
@@ -68,7 +70,10 @@ class __TwigTemplate_99ffe29f297a2e7e4e186b253f62efdf38206692e853b8d9486bda57ced
                 <!-- menu profile quick info -->
                 <div class=\"profile clearfix\">
                     <div class=\"profile_pic\">
-                        <img src=\"images/img.jpg\" alt=\"...\" class=\"img-circle profile_img\">
+                        <img src=\"";
+        // line 35
+        echo twig_escape_filter($this->env, (($context["imagesPath"] ?? null) . "img.jpg"), "html", null, true);
+        echo "\" alt=\"...\" class=\"img-circle profile_img\">
                     </div>
                     <div class=\"profile_info\">
                         <span>Welcome,</span>
@@ -154,7 +159,10 @@ class __TwigTemplate_99ffe29f297a2e7e4e186b253f62efdf38206692e853b8d9486bda57ced
                         <li class=\"nav-item dropdown open\" style=\"padding-left: 15px;\">
                             <a href=\"javascript:;\" class=\"user-profile dropdown-toggle\" aria-haspopup=\"true\"
                                id=\"navbarDropdown\" data-toggle=\"dropdown\" aria-expanded=\"false\">
-                                <img src=\"images/img.jpg\" alt=\"\">John Doe
+                                <img src=\"";
+        // line 121
+        echo twig_escape_filter($this->env, (($context["imagesPath"] ?? null) . "img.jpg"), "html", null, true);
+        echo "\" alt=\"\">John Doe
                             </a>
                             <div class=\"dropdown-menu dropdown-usermenu pull-right\" aria-labelledby=\"navbarDropdown\">
                                 <a class=\"dropdown-item\" href=\"logout.html\"><i class=\"fa fa-sign-out pull-right\"></i>
@@ -168,9 +176,9 @@ class __TwigTemplate_99ffe29f297a2e7e4e186b253f62efdf38206692e853b8d9486bda57ced
         <!-- /top navigation -->
 
         ";
-        // line 133
+        // line 134
         $this->displayBlock('content', $context, $blocks);
-        // line 135
+        // line 136
         echo "
         <!-- footer content -->
         <footer>
@@ -198,7 +206,7 @@ class __TwigTemplate_99ffe29f297a2e7e4e186b253f62efdf38206692e853b8d9486bda57ced
 ";
     }
 
-    // line 133
+    // line 134
     public function block_content($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -211,9 +219,14 @@ class __TwigTemplate_99ffe29f297a2e7e4e186b253f62efdf38206692e853b8d9486bda57ced
         return "alela.twig";
     }
 
+    public function isTraitable()
+    {
+        return false;
+    }
+
     public function getDebugInfo()
     {
-        return array (  202 => 133,  174 => 135,  172 => 133,  38 => 1,);
+        return array (  210 => 134,  182 => 136,  180 => 134,  164 => 121,  75 => 35,  40 => 2,  38 => 1,);
     }
 
     public function getSourceContext()

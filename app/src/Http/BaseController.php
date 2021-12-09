@@ -21,7 +21,6 @@ class BaseController
     }
     public function login()
     {
-        
         echo $this->twigEngine->render('login.twig');
     }
    
