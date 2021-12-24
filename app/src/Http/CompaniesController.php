@@ -31,12 +31,12 @@ class CompaniesController
         echo $this->twig->render('companies/overview.twig', ['companies' => $companies]);
     }
 
-    // public function overview()
-    // {
-    //     echo "testsearchEMPTY";
-    //     $companies = $this->findCompanies('');
-    //     echo $this->twigEngine->render('companies/overview.twig', ['companies' => $companies]);
-    // }
+    public function overview()
+    {
+        echo "testsearchEMPTY";
+        $companies = $this->findCompanies('');
+        echo $this->twigEngine->render('companies/overview.twig', ['companies' => $companies]);
+    }
     // public function search($term)
     // {
     //     $companies = $this->findCompanies($term);

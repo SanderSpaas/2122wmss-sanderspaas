@@ -49,6 +49,14 @@ $router->post('/login', 'BaseController@login');
 // $router->get('/register');
 // $router->post('/register');
 
+
+$router->mount('/api', function() use ($router){
+    $router->get('/tasks', 'TaskController@overview');
+    $router->post('/tasks', 'TaskController@create');
+    $router->delete('/tasks/(\d+)', 'TaskController@delete');
+    $router->put('/tasks/(\d+)', 'TaskController@update');
+});
+
 $router->set404(function () {
     http_response_code(404);
     echo 'Looks like this page got lost in my bad coding practises ;).';

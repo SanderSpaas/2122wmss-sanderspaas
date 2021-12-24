@@ -46,6 +46,7 @@ if (isset($_POST['moduleAction']) && ($_POST['moduleAction'] === 'add')) {
     if (trim($what) == '') {
         array_push($formErrors, "Voer een naam in voor je taak!");
     }
+    
     if (!in_array(trim($priority), $priorities)) {
         array_push($formErrors, "Ongeldige prioriteit geselecteerd");
     }

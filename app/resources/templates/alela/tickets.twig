@@ -1,0 +1,89 @@
+{% extends "alela.twig" %}
+{% block content %}
+        <!-- page content -->
+        <div class="right_col" role="main">
+            <div class="">
+                <div class="page-title">
+                    <div class="title_left">
+                        <h3>Tickets</h3>
+                    </div>
+
+                    <div class="title_right">
+                        <div class="col-md-5 col-sm-5   form-group pull-right top_search">
+                            <form action="/tickets" method="post">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" placeholder="Search for...">
+                                    <span class="input-group-btn"><button class="btn btn-default" type="button">Go!</button></span>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="clearfix"></div>
+
+                <div class="row" style="display: block;">
+                    <div class="col-md-12 col-sm-12  ">
+                        <div class="x_panel">
+                            <div class="x_title">
+                                <ul class="nav navbar-right panel_toolbox">
+                                    <li><a class="close-link"><i class="fa fa-plus"></i> Add a company</a></li>
+                                </ul>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="x_content">
+                                <table class="table table-striped table-hover">
+                                    <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Company name</th>
+                                        <th>Status</th>
+                                        <th>Team</th>
+                                        <th>Title</th>
+                                        <th>Assignee</th>
+                                        <th>Priority</th>
+                                        <th></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <th scope="row">1</th>
+                                        <td>Odisee</td>
+                                        <td>In progress</td>
+                                        <td>Infra</td>
+                                        <td>Setup loadbalancer</td>
+                                        <td>Joris Maervoet</td>
+                                        <td>Blocker</td>
+                                        <td><a href="#"><span class="fa fa-pencil"></span> Edit</a> | <a href="#"><span class="fa fa-folder-open"></span>  More</a> </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">2</th>
+                                        <td>Café Robot</td>
+                                        <td>Open</td>
+                                        <td>Sysadmin</td>
+                                        <td>Sendgrid integration</td>
+                                        <td>Pieter Van Peteghem</td>
+                                        <td>High</td>
+                                        <td><a href="#"><span class="fa fa-pencil"></span> Edit</a> | <a href="#"><span class="fa fa-folder-open"></span>  More</a> </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">3</th>
+                                        <td>Café Robot</td>
+                                        <td>Open</td>
+                                        <td>Web</td>
+                                        <td>Extra page: contact</td>
+                                        <td>Pieter Van Peteghem</td>
+                                        <td>Medium</td>
+                                        <td><a href="#"><span class="fa fa-pencil"></span> Edit</a> | <a href="#"><span class="fa fa-folder-open"></span>  More</a> </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+        <!-- /page content -->
+    {% endblock %}
